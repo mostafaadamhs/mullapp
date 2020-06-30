@@ -24,6 +24,7 @@ export class TrashService {
   // find all
   async findAll() {
     let obj = {};
+    const arr = [];
     //let obj2 = {};
     //const ob3 = {};
     const action = await db.collection('trashes').get();
@@ -32,9 +33,13 @@ export class TrashService {
       .collection('nutzers')
       .doc('3Za9d0Vl0PfBkNu9XA2O')
       .get();
+      
 */
-    action.docs.map(m => {
+
+    await action.docs.map(m => {
       obj = { data: m.data() };
+      obj['data']['id'] = m.id;
+      arr.push(obj);
     });
 
     //obj2 = { id: user.id };
@@ -42,7 +47,7 @@ export class TrashService {
     //const usr = user.data();
     // obj['data'].updatedBy = { id: user.id, userName: usr.userName };
 
-    return { obj };
+    return { arr };
   }
 
   // find one
@@ -51,7 +56,10 @@ export class TrashService {
       .collection('trashes')
       .doc(id)
       .get();
-    return action;
+
+    const cust = await action.data();
+    cust['id'] = action.id;
+    return cust;
   }
 
   // update by admin or Mitarbeiter and add seiner-id

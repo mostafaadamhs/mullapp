@@ -1,9 +1,8 @@
 import { AdminService } from './admin.service';
-import { AdminDTO } from './dto/admin.dto';
 export declare class AdminController {
     private service;
     constructor(service: AdminService);
-    createAdmin(body: AdminDTO): Promise<FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>>;
+    createUser(body: any): Promise<string | FirebaseFirestore.WriteResult>;
     findeOne(_id: any): Promise<FirebaseFirestore.DocumentData>;
     findByTyp(_typ: string): Promise<FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData>>;
     findAll(): Promise<FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData>>;

@@ -29,6 +29,29 @@ export class AdminService {
 
     return await action.get();
   }
+  //
+  async addUser(data) {
+    const act = await admin
+      .auth()
+      .createUser({
+        displayName: data.username,
+        email: data.email,
+        emailVerified: false,
+        password: data.password,
+      })
+      .then(usr => {
+        const action = db
+          .collection('users')
+          .doc(usr.uid)
+          .set(data);
+        return action;
+      })
+      .catch(error => {
+        return 'Error' + error;
+      });
+
+    return act;
+  }
 
   // find admin
   async findOne(_id: any) {
@@ -39,7 +62,7 @@ export class AdminService {
 
     if (!actionOne) throw new NotFoundException('Nutzer does not exist');
 
-    return { _id: actionOne.id, data: actionOne.data() };
+    return { _id: actionOne.id, data: await actionOne.data() };
   }
   // find all by typ
   async findAllByTyp(_typ: string) {

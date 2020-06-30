@@ -14,13 +14,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const admin_service_1 = require("./admin.service");
-const admin_dto_1 = require("./dto/admin.dto");
 let AdminController = class AdminController {
     constructor(service) {
         this.service = service;
     }
-    async createAdmin(body) {
-        const result = await this.service.addAdmin(body);
+    async createUser(body) {
+        body['typ'] = 'mitarbeiter';
+        const result = await this.service.addUser(body);
         return result;
     }
     async findeOne(_id) {
@@ -55,9 +55,9 @@ __decorate([
     common_1.Post(),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [admin_dto_1.AdminDTO]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], AdminController.prototype, "createAdmin", null);
+], AdminController.prototype, "createUser", null);
 __decorate([
     common_1.Get(':id'),
     __param(0, common_1.Param('id')),

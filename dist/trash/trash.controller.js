@@ -22,6 +22,10 @@ let TrashController = class TrashController {
         const result = await this.service.findAll();
         return result;
     }
+    async viewOneTrash(id) {
+        const result = await this.service.findOne(id);
+        return result;
+    }
     async createTrash(body) {
         const result = await this.service.addOne(body);
         return result;
@@ -37,6 +41,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], TrashController.prototype, "viewAllTrashes", null);
+__decorate([
+    common_1.Get(':id'),
+    __param(0, common_1.Param('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], TrashController.prototype, "viewOneTrash", null);
 __decorate([
     common_1.Post(),
     __param(0, common_1.Body()),

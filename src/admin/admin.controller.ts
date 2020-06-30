@@ -14,9 +14,19 @@ import { AdminDTO } from './dto/admin.dto';
 export class AdminController {
   constructor(private service: AdminService) {}
 
+  /*
   @Post()
   async createAdmin(@Body() body: AdminDTO) {
     const result = await this.service.addAdmin(body);
+    return result;
+  }
+*/
+
+  @Post()
+  async createUser(@Body() body) {
+    body['typ'] = 'mitarbeiter';
+    const result = await this.service.addUser(body);
+
     return result;
   }
 

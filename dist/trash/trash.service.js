@@ -25,18 +25,23 @@ let TrashService = class TrashService {
     }
     async findAll() {
         let obj = {};
+        const arr = [];
         const action = await db.collection('trashes').get();
-        action.docs.map(m => {
+        await action.docs.map(m => {
             obj = { data: m.data() };
+            obj['data']['id'] = m.id;
+            arr.push(obj);
         });
-        return { obj };
+        return { arr };
     }
     async findOne(id) {
         const action = await db
             .collection('trashes')
             .doc(id)
             .get();
-        return action;
+        const cust = await action.data();
+        cust['id'] = action.id;
+        return cust;
     }
     async updateOne(userId, id, data) {
         data['updated_at'] = new Date().toISOString();

@@ -11,6 +11,12 @@ export class TrashController {
     return result;
   }
 
+  @Get(':id')
+  async viewOneTrash(@Param('id') id) {
+    const result = await this.service.findOne(id);
+    return result;
+  }
+
   @Post()
   async createTrash(@Body() body: any) {
     const result = await this.service.addOne(body);

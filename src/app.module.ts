@@ -1,3 +1,4 @@
+import { AuthModule } from './auth/auth.module';
 import { TrashModule } from './trash/trash.module';
 import { MitarbeiterModule } from './mitarbeiter/mitarbeiter.module';
 import { AdminModule } from './admin/admin.module';
@@ -6,7 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [TrashModule, MitarbeiterModule, AdminModule],
+  imports: [AuthModule, TrashModule, MitarbeiterModule, AdminModule],
   controllers: [AppController],
   providers: [AppService],
 })

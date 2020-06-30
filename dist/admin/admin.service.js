@@ -23,6 +23,27 @@ let AdminService = class AdminService {
         const action = await db.collection('nutzers').add(data);
         return await action.get();
     }
+    async addUser(data) {
+        const act = await admin
+            .auth()
+            .createUser({
+            displayName: data.username,
+            email: data.email,
+            emailVerified: false,
+            password: data.password,
+        })
+            .then(usr => {
+            const action = db
+                .collection('users')
+                .doc(usr.uid)
+                .set(data);
+            return action;
+        })
+            .catch(error => {
+            return 'Error' + error;
+        });
+        return act;
+    }
     async findOne(_id) {
         const actionOne = await db
             .collection('nutzers')
@@ -30,7 +51,7 @@ let AdminService = class AdminService {
             .get();
         if (!actionOne)
             throw new common_1.NotFoundException('Nutzer does not exist');
-        return { _id: actionOne.id, data: actionOne.data() };
+        return { _id: actionOne.id, data: await actionOne.data() };
     }
     async findAllByTyp(_typ) {
         const action = await db.collection('nutzers').where('typ', '==', _typ);

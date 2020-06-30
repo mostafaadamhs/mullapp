@@ -2,6 +2,7 @@ import { AdminDTO } from './dto/admin.dto';
 export declare class AdminService {
     resultData: AdminDTO;
     addAdmin(data: AdminDTO): Promise<FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>>;
+    addUser(data: any): Promise<string | FirebaseFirestore.WriteResult>;
     findOne(_id: any): Promise<{
         _id: string;
         data: FirebaseFirestore.DocumentData;

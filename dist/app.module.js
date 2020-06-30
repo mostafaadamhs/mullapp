@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const auth_module_1 = require("./auth/auth.module");
 const trash_module_1 = require("./trash/trash.module");
 const mitarbeiter_module_1 = require("./mitarbeiter/mitarbeiter.module");
 const admin_module_1 = require("./admin/admin.module");
@@ -16,7 +17,7 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [trash_module_1.TrashModule, mitarbeiter_module_1.MitarbeiterModule, admin_module_1.AdminModule],
+        imports: [auth_module_1.AuthModule, trash_module_1.TrashModule, mitarbeiter_module_1.MitarbeiterModule, admin_module_1.AdminModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
